@@ -84,6 +84,12 @@
 		});
 	});
 </script>
+<script>
+    function del()
+    {
+        var Nobel = document.getElementById("image").style.display ='None';
+    }
+</script>
     </head>
     <body>
         <%@ include file="/views/menu.html" %>
@@ -94,7 +100,9 @@
                   <div id="webcam"></div>
                   <h1>Κάνε Snap</h1>
                   <button class="btn btn-danger" id="btn2" onclick="base64_toimage()">Send</button>
+                  <button class="btn btn-danger" id="btn2" onclick="del()">Delete</button>
                   <img id="image"/>
+                  
               </div>
               <div class="col-md-6 col-md-offset-2 bg-info">
                   
