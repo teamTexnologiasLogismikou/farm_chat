@@ -1,0 +1,13 @@
+.messageSent{
+    width:150px;
+    height:auto;
+    border-radius: 10px;
+    background: rgba(255,206,43,0.3);
+    padding: 10px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+#response{
+    max-height: 450px;
+    overflow: auto;
+}

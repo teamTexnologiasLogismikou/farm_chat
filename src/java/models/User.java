@@ -62,6 +62,56 @@ public class User {
         this.password=password;
     }
     
+    public ArrayList<User> getNotMyFriends() throws SQLException{
+        PreparedStatement pst = null;
+        ResultSet rs;
+        ArrayList<User> users = new ArrayList<User>();
+        DAO db=new DAO();
+        
+        Connection con= db.connect();
+        String sqlString = "SELECT * FROM users, friends WHERE users.uid NOT IN (SELECT friends.friendId from friends) AND users.uid <> "+"'"+uid+"'"+"GROUP BY users.username";
+            pst = con.prepareStatement("");
+            pst.executeQuery(sqlString);
+            rs = pst.getResultSet();
+            while(rs.next()){
+                User user = new User();
+                user.setUid(rs.getString("uid"));
+                user.setLastName(rs.getString("last_name"));
+                user.setFirstName(rs.getString("first_name"));
+                user.setUsername(rs.getString("username"));
+                users.add(user);
+            }
+            rs.close();
+            pst.close();
+
+        return users;
+    }
+    
+    public ArrayList<User> getAllMyFriends() throws SQLException{
+        PreparedStatement pst = null;
+        ResultSet rs;
+        ArrayList<User> users = new ArrayList<User>();
+        DAO dao=new DAO();
+        
+        Connection con= dao.connect();
+        String sql = "SELECT users.uid, users.last_name, users.first_name, users.username, FROM users,friends WHERE friends.friendId  = users.uid AND friends.myId = "+"'"+uid+"'";
+            pst = con.prepareStatement("");
+            pst.executeQuery(sql);
+            rs = pst.getResultSet();
+            while(rs.next()){
+                User user = new User();
+                user.setUid(rs.getString("uid"));
+                user.setLastName(rs.getString("last_name"));
+                user.setFirstName(rs.getString("first_name"));
+                user.setUsername(rs.getString("username"));
+                users.add(user);
+            }
+            rs.close();
+            pst.close();
+
+        return users;
+    }
+    
     public static boolean LoginUser(String username,String password) {
         boolean check =false;
         try {      
@@ -135,7 +185,6 @@ public class User {
             }
             rs.close();
             pst.close();
-
         return users;
     }
 }
