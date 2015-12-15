@@ -37,12 +37,16 @@ public class Friend {
             DAO dao=new DAO();
             Connection con= dao.connect();
             String sqlString="INSERT INTO friends (myId,friendId) VALUES ('"+myId+"','"+friendId+"')";
+            String sqlString2="INSERT INTO friends (myId,friendId) VALUES ('"+friendId+"','"+myId+"')";
             Statement s = con.createStatement();
+            Statement s2 = con.createStatement();
             try{    
                 s.executeUpdate(sqlString);
+                s2.executeUpdate(sqlString2);
                 s.close();
+                s2.close();
                 con.close();
-            } catch (SQLException ex) {Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);}
-        } catch (SQLException ex) {Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);}  
+            } catch (SQLException ex) {Logger.getLogger(ChatUser.class.getName()).log(Level.SEVERE, null, ex);}
+        } catch (SQLException ex) {Logger.getLogger(ChatUser.class.getName()).log(Level.SEVERE, null, ex);}  
     }
 }

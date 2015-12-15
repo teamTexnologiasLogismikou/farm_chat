@@ -28,6 +28,11 @@
         <servlet-name>Add</servlet-name>
         <servlet-class>controllers.Add</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>ChatServer</servlet-name>
+        <servlet-class>controllers.ChatServer</servlet-class>
+    </servlet>
     <!-- **************************************************************** -->
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -58,6 +63,10 @@
     <servlet-mapping>
         <servlet-name>Add</servlet-name>
         <url-pattern>/add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChatServer</servlet-name>
+        <url-pattern>/ChatServer</url-pattern>
     </servlet-mapping>
     
     <session-config>

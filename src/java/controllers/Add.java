@@ -15,9 +15,9 @@ public class Add extends HttpServlet{
     public void add(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
         
         response.setContentType("text/html;charset=UTF-8");
-        //PrintWriter pw = response.getWriter();
+        PrintWriter pw = response.getWriter();
         HttpSession s = request.getSession();
-        //pw.println(s.getAttribute("id"));
+        pw.println(s.getAttribute("id"));
         Friend f = new Friend();
         f.setMyId(s.getAttribute("uid").toString());
         f.setFriendId(request.getParameter("friendId"));
