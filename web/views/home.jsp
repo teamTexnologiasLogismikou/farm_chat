@@ -127,6 +127,25 @@
               </div>
           </div>
       </div>
+      
+       <div class="col-md-3 bg-warning">
+                    <h3>Friends List</h3>
+                    <hr/>
+                    <table class="table table-condensed">
+                        <tbody>
+                        <c:forEach var="friend" items="${myFriends}">
+                            <tr>
+                                <td>
+                                    <span><button id="user_${friend.uid}" class="btn btn-success btn-sm" onclick="openNewChat(${friend.uid},'${friend.username}')">online</button>  </span>
+                                    <span class="h3">${friend.username} - (${friend.firstName} ${friend.lastName})</span>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+          </div>
     </body>
 </html>
 
