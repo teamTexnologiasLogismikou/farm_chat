@@ -8,7 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.User;
+import models.ChatUser;
 public class Register extends HttpServlet{
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException  {
@@ -16,7 +16,7 @@ public class Register extends HttpServlet{
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter pw = response.getWriter();
         try{
-            User user = new User();
+            ChatUser user = new ChatUser();
             user.setLastName(request.getParameter("lastName"));
             user.setFirstName(request.getParameter("firstName"));
             user.setUsername(request.getParameter("username"));
@@ -36,3 +36,4 @@ public class Register extends HttpServlet{
         processRequest(request, response);
     }
 }
+

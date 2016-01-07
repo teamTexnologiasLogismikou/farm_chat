@@ -19,9 +19,9 @@
             function base64_toimage() {
                 $('#image').attr("src","data:image/png;base64,"+$.scriptcam.getFrameAsBase64());
             };
-            function base64_tofield_and_image(b64) {
-                $('#formfield').val(b64);
-                $('#image').attr("src","data:image/png;base64,"+b64);
+            function base64_tofield_and_image() {
+                $('#base64Form').val($.scriptcam.getFrameAsBase64());
+                $('#image').attr("src","data:image/png;base64,"+$.scriptcam.getFrameAsBase64());
             };
             function changeCamera() {
                 $.scriptcam.changeCamera($('#cameraNames').val());
