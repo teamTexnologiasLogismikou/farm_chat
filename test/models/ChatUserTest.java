@@ -130,3 +130,114 @@ public class ChatUserTest {
         obj.setUid(uid);
         assertEquals(uid, obj.getUid());
     }
+
+    /**
+     * Test of setLastName method, of class ChatUser.
+     */
+    @Test
+    public void testSetLastName() {
+        System.out.println("setLastName");
+        String lastName = "aaa";
+        ChatUser obj = new ChatUser();
+        obj.setLastName(lastName);
+        assertEquals(lastName, obj.getLastName());
+    }
+
+    /**
+     * Test of setFirstName method, of class ChatUser.
+     */
+    @Test
+    public void testSetFirstName() {
+        System.out.println("setFirstName");
+        String firstName = "aaa";
+        ChatUser obj = new ChatUser();
+        obj.setFirstName(firstName);
+        assertEquals(firstName, obj.getFirstName());
+    }
+
+    /**
+     * Test of setUsername method, of class ChatUser.
+     */
+    @Test
+    public void testSetUsername() {
+        System.out.println("setUsername");
+        String username = "aaa";
+        ChatUser obj = new ChatUser();
+        obj.setUsername(username);
+        assertEquals(username, obj.getUsername());
+    }
+
+    /**
+     * Test of setPassword method, of class ChatUser.
+     */
+    @Test
+    public void testSetPassword() {
+        System.out.println("setPassword");
+        String password = "aaa";
+        ChatUser obj = new ChatUser();
+        obj.setPassword(password);
+        assertEquals(password, obj.getPassword());
+    }
+
+    /**
+     * Test of friendsToAdd method, of class ChatUser.
+     */
+    @Test
+    public void testFriendsToAdd() throws Exception {
+        System.out.println("friendsToAdd");
+        ChatUser obj = new ChatUser();
+        ArrayList<ChatUser> friends = obj.friendsToAdd();
+        assertNotNull(friends);
+        assertTrue(friends.size()>0);
+    }
+
+    /**
+     * Test of LoginUser method, of class ChatUser.
+     */
+    @Test
+    public void testLoginUser() {
+        System.out.println("LoginUser");
+        String username = "aaa";
+        String password = "aaa";
+        boolean expResult = true;
+        boolean result = ChatUser.LoginUser(username, password);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getUser method, of class ChatUser.
+     */
+    @Test
+    public void testGetUser() {
+        System.out.println("getUser");
+        ChatUser obj = new ChatUser();
+        obj.setUsername("aaa");
+        obj.getUser();
+        assertEquals("2", obj.getUid());
+    }
+
+    /**
+     * Test of getAllUsers method, of class ChatUser.
+     */
+    @Test
+    public void testGetAllUsers() throws Exception {
+        System.out.println("getAllUsers");
+        ChatUser obj = new ChatUser("2","abc","abc","aaa","aaa",1);
+        ArrayList<ChatUser> allUsers = obj.getAllUsers();
+        assertNotNull(allUsers);
+        assertTrue(allUsers.size()>0);
+    }
+
+    /**
+     * Test of myFriends method, of class ChatUser.
+     */
+    @Test
+    public void testMyFriends() throws Exception {
+        System.out.println("myFriends");
+        ChatUser obj = new ChatUser("2","abc","abc","aaa","aaa",1);
+        ArrayList<ChatUser> myFriends = obj.myFriends();
+        assertNotNull(myFriends);
+        assertTrue(myFriends.size()>0);
+    }
+    
+}

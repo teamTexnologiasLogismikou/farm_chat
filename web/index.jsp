@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="models.User"%>
+<%@page import="models.ChatUser"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,7 +15,7 @@
         <script type="text/javascript" src="scriptcam.js" ></script>
     </head>
     <body>
-        <jsp:useBean id="user" scope="request" class="models.User"></jsp:useBean>
+        <jsp:useBean id="user" scope="request" class="models.ChatUser"></jsp:useBean>
         <div class="container">    
             <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
                 <div class="panel panel-info" >

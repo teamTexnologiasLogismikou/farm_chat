@@ -5,20 +5,40 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class User {
+public class ChatUser {
     
+    private int status = 0;
+    public static int OFFLINE = 0;
+    public static int ONLINE = 1;
     private String uid;
     private String firstName;
     private String lastName;
     private String username;
     private String password;
     
-    public User(){
+    public ChatUser(){
         uid="";
         firstName="";
         lastName="";
         username="";
         password="";
+    }
+    
+    public ChatUser(String uid, String firstName, String lastName, String username, String password, int status){
+        this.uid = uid;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
     
     public String getUid() {
@@ -62,19 +82,19 @@ public class User {
         this.password=password;
     }
     
-    public ArrayList<User> getNotMyFriends() throws SQLException{
+        public ArrayList<ChatUser> friendsToAdd() throws SQLException{
         PreparedStatement pst = null;
         ResultSet rs;
-        ArrayList<User> users = new ArrayList<User>();
+        ArrayList<ChatUser> users = new ArrayList<ChatUser>();
         DAO db=new DAO();
         
         Connection con= db.connect();
-        String sqlString = "SELECT * FROM users, friends WHERE users.uid NOT IN (SELECT friends.friendId from friends) AND users.uid <> "+"'"+uid+"'"+"GROUP BY users.username";
+        String sqlString = "SELECT * FROM users, friends WHERE users.uid NOT IN (SELECT friends.friendId from friends WHERE friends.myId = "+"'"+uid+"'"+") AND users.uid <> "+"'"+uid+"'"+"GROUP BY users.username";
             pst = con.prepareStatement("");
             pst.executeQuery(sqlString);
             rs = pst.getResultSet();
             while(rs.next()){
-                User user = new User();
+                ChatUser user = new ChatUser();
                 user.setUid(rs.getString("uid"));
                 user.setLastName(rs.getString("last_name"));
                 user.setFirstName(rs.getString("first_name"));
@@ -83,31 +103,7 @@ public class User {
             }
             rs.close();
             pst.close();
-
-        return users;
-    }
-    
-    public ArrayList<User> getAllMyFriends() throws SQLException{
-        PreparedStatement pst = null;
-        ResultSet rs;
-        ArrayList<User> users = new ArrayList<User>();
-        DAO dao=new DAO();
-        
-        Connection con= dao.connect();
-        String sql = "SELECT users.uid, users.last_name, users.first_name, users.username, FROM users,friends WHERE friends.friendId  = users.uid AND friends.myId = "+"'"+uid+"'";
-            pst = con.prepareStatement("");
-            pst.executeQuery(sql);
-            rs = pst.getResultSet();
-            while(rs.next()){
-                User user = new User();
-                user.setUid(rs.getString("uid"));
-                user.setLastName(rs.getString("last_name"));
-                user.setFirstName(rs.getString("first_name"));
-                user.setUsername(rs.getString("username"));
-                users.add(user);
-            }
-            rs.close();
-            pst.close();
+            con.close();
 
         return users;
     }
@@ -146,7 +142,7 @@ public class User {
             s.close();
             con.close();
         } catch (SQLException ex) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ChatUser.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
     
@@ -160,15 +156,15 @@ public class User {
                 s.executeUpdate(sqlString);
                 s.close();
                 con.close();
-            } catch (SQLException ex) {Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);}
-        } catch (SQLException ex) {Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);}  
+            } catch (SQLException ex) {Logger.getLogger(ChatUser.class.getName()).log(Level.SEVERE, null, ex);}
+        } catch (SQLException ex) {Logger.getLogger(ChatUser.class.getName()).log(Level.SEVERE, null, ex);}  
     }
 
     
-    public ArrayList<User> getAllUsers() throws SQLException{
+    public ArrayList<ChatUser> getAllUsers() throws SQLException{
         PreparedStatement pst = null;
         ResultSet rs;
-        ArrayList<User> users = new ArrayList<User>();
+        ArrayList<ChatUser> users = new ArrayList<ChatUser>();
         DAO dao=new DAO();
         Connection con= dao.connect();
         String sqlString = "SELECT * FROM users WHERE users.username <> "+"'"+username+"'";
@@ -176,7 +172,7 @@ public class User {
             pst.executeQuery(sqlString);
             rs = pst.getResultSet();
             while(rs.next()){
-                User user = new User();
+                ChatUser user = new ChatUser();
                 user.setUid(rs.getString("uid"));
                 user.setLastName(rs.getString("last_name"));
                 user.setFirstName(rs.getString("first_name"));
@@ -185,6 +181,32 @@ public class User {
             }
             rs.close();
             pst.close();
+            con.close();
+        return users;
+    }
+    
+    public ArrayList<ChatUser> myFriends() throws SQLException{
+        PreparedStatement pst = null;
+        ResultSet rs;
+        ArrayList<ChatUser> users = new ArrayList<ChatUser>();
+        DAO db=new DAO();
+        
+        Connection con= db.connect();
+        String sql = "SELECT users.uid, users.last_name, users.first_name, users.username FROM users,friends WHERE friends.friendId  = users.uid AND friends.myId = "+"'"+uid+"'";
+            pst = con.prepareStatement("");
+            pst.executeQuery(sql);
+            rs = pst.getResultSet();
+            while(rs.next()){
+                ChatUser user = new ChatUser();
+                user.setUid(rs.getString("uid"));
+                user.setLastName(rs.getString("last_name"));
+                user.setFirstName(rs.getString("first_name"));
+                user.setUsername(rs.getString("username"));
+                users.add(user);
+            }
+            rs.close();
+            pst.close();
+            con.close();
         return users;
     }
 }
