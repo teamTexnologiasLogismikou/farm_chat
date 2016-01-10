@@ -13,6 +13,11 @@ public class Friend {
         myId="";
         friendId="";
     }
+    
+    public Friend(String myId, String friendId){
+        this.myId = myId;
+        this.friendId = friendId;
+    }
 
     
     

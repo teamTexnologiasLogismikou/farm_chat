@@ -27,7 +27,7 @@ public class ChatController implements Runnable{
         return chatHelper;
     }
     
-    private ChatController(){
+    ChatController(){
             cleanThread=new Thread(this);
             cleanThread.start();
         }    
@@ -35,7 +35,7 @@ public class ChatController implements Runnable{
         ChatUser cu = new ChatUser();
         usersList = cu.getAllUsers();
         onlineUsers.remove(userId);
-        System.out.println("User removed");
+        System.out.println("χρηστης αποσυνδεθηκε");
         for(int i=0;i<usersList.size();i++){
             if(usersList.get(i).getUid().equals(String.valueOf(userId))){
                 usersList.get(i).setStatus(ChatUser.OFFLINE);
@@ -49,6 +49,7 @@ public class ChatController implements Runnable{
         ChatUser cu = new ChatUser();
         usersList = cu.getAllUsers();
         onlineUsers.put(user_id, new Date());
+        System.out.println("χρηστης συνδέθηκε");
         for(int i=0;i<usersList.size();i++){
             if(usersList.get(i).getUid().equals(String.valueOf(user_id))){
                 usersList.get(i).setStatus(ChatUser.ONLINE);

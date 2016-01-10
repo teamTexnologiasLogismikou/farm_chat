@@ -54,7 +54,6 @@ public class ChatServer extends HttpServlet{
                 response.setCharacterEncoding("UTF-8");
                 response.setHeader("message_count", ""+messages.length);
                 PrintWriter out = response.getWriter();
-                //δεν το χρισιμοποιοθμε
                 try{
                     if(ChatSettings.responseType==ChatSettings.XML){
                         out.println("<chat_messages>");
