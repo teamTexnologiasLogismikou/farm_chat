@@ -21,10 +21,7 @@ public class Friends extends HttpServlet{
         response.setContentType("text/html;charset=UTF-8");
         HttpSession s = request.getSession();
         PrintWriter pw = response.getWriter();
-        if(s.getAttribute("username") == null){
-            pw.println("Δέν έχετε δικαίωμα πρόσβασης");
-            pw.println("<a href='index'>Συνδεθείτε</a>");
-        }else{
+        if(s != null && s.getAttribute("username") != null){
             ChatUser user = new ChatUser();
             user.setUsername(s.getAttribute("username").toString());
             user.getUser();
@@ -32,6 +29,9 @@ public class Friends extends HttpServlet{
             request.setAttribute("users",users);
             RequestDispatcher rd1 = request.getRequestDispatcher("views/add.jsp");
             rd1.forward(request,response);
+        }else{
+            pw.println("Δέν έχετε δικαίωμα πρόσβασης");
+            pw.println("<a href='index'>Συνδεθείτε</a>");
 
         }
     }

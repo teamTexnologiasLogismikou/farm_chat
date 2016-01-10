@@ -6,7 +6,6 @@ import java.io.Serializable;
 public class ChatMessage implements Serializable {
     public static int NEW_MESSAGE_TYPE=0;
     public static int RETURN_MESSAGE_TYPE=1;
-    
     private String message;
     private int from_user;
     private int to_user;
@@ -14,11 +13,21 @@ public class ChatMessage implements Serializable {
     private String messageTime;
     private String img;
     private int messageType=0;
-    
     public String toXML(){
         return "<chat_message><from_user>"+from_user+"</from_user><from_user_name>"+from_user_name+"</from_user_name><message>"+message+"</message><message_type>"+messageType+"</message_type></chat_message>";
     }
+    public ChatMessage(String message, int from_user, int to_user, String from_user_name, String messageTime, String img){
+        this.message = message;
+        this.from_user = from_user;
+        this.to_user = to_user;
+        this.from_user_name = from_user_name;
+        this.messageTime = messageTime;
+        this.img = img;
+    }
     
+    public ChatMessage(){
+        
+    }
     public String toMultipleValues(){
         return from_user+"ø"+from_user_name+"ø"+message+"ø"+img+"ø";
     }
