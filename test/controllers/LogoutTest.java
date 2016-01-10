@@ -18,10 +18,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-/**
- *
- * @author TROUP
- */
+
 public class LogoutTest {
     
     public LogoutTest() {
