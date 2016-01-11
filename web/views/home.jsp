@@ -172,7 +172,13 @@
                     $('#user_'+user_no).addClass('btn-danger').html('offline');
                 }
             }
-        </script>           
+        </script> 
+    <script>
+        function del()
+        {
+           var Nobel = document.getElementById("image").style.display ='None';
+        }
+    </script>
     </head>
     <body  onload='setTimeout("update()",refreshRate);'>
         <nav role="navigation" class="navbar navbar-inverse">
@@ -203,6 +209,7 @@
               <div class="col-md-3">
                   <div id="webcam"></div>
                   <button class="btn btn-info" id="btn2" onclick="base64_tofield_and_image()">Take a Picture!</button>
+                  <button class="btn btn-info" id="btn2" onclick="del()">Delete photo!</button>
                   <textarea style="display: none" id="base64Form"></textarea>
               </div>
               
